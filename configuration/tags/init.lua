@@ -3,13 +3,14 @@ local gears = require('gears')
 local beautiful = require('beautiful')
 local icons = require('theme.icons')
 local apps = require('configuration.apps')
+local sharedtags = require("library.sharedtags")
 
-local tags = {
+tags = sharedtags({
 	{
 		type = 'terminal',
 		icon = icons.terminal,
 		default_app = apps.default.terminal,
-		gap = beautiful.useless_gap
+		gap = beautiful.useless_gap,
 	},
 	{
 		type = 'internet',
@@ -35,43 +36,42 @@ local tags = {
 		icon = icons.multimedia,
 		default_app = apps.default.multimedia,
 		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.floating,
-		gap = 0
+		layout = awful.layout.suit.max,
 	},
 	{
 		type = 'games',
 		icon = icons.games,
 		default_app = apps.default.game,
-		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.floating
+		layout = awful.layout.suit.floating,
+		gap = 0,
+		screen = 2
 	},
 	{
 		type = 'graphics',
 		icon = icons.graphics,
 		default_app = apps.default.graphics,
-		gap = beautiful.useless_gap
+		gap = 0,
+		screen = 2
 	},
 	{
 		type = 'sandbox',
 		icon = icons.sandbox,
 		default_app = apps.default.sandbox,
 		layout = awful.layout.suit.max,
-		gap = 0
+		gap = 0,
+		screen = 2
 	},
 	{
 		type = 'any',
 		icon = icons.development,
 		default_app = apps.default.development,
-		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.floating
+		gap = 0,
+		layout = awful.layout.suit.floating,
+		screen = 2
 	}
-	-- {
-	--   type = 'social',
-	--   icon = icons.social,
-	--   default_app = 'discord',
-	--   gap = beautiful.useless_gap
-	-- }
-}
+})
+
+gears.debug.dump(tags,"tags")
 
 -- Set tags layout
 tag.connect_signal(
@@ -87,26 +87,26 @@ tag.connect_signal(
 )
 
 -- Create tags for each screen
-screen.connect_signal(
-	'request::desktop_decoration',
-	function(s)
-		for i, tag in pairs(tags) do
-			awful.tag.add(
-				i,
-				{
-					icon = tag.icon,
-					icon_only = true,
-					layout = tag.layout or awful.layout.suit.spiral.dwindle,
-					gap_single_client = true,
-					gap = tag.gap,
-					screen = s,
-					default_app = tag.default_app,
-					selected = i == 1
-				}
-			)
-		end
-	end
-)
+-- screen.connect_signal(
+	-- 'request::desktop_decoration',
+	-- function(s)
+	-- 	for i, tag in pairs(tags) do
+	-- 		awful.tag.add(
+	-- 			i,
+	-- 			{
+	-- 				icon = tag.icon,
+	-- 				icon_only = true,
+	-- 				layout = tag.layout or awful.layout.suit.spiral.dwindle,
+	-- 				gap_single_client = true,
+	-- 				gap = tag.gap,
+	-- 				screen = s,
+	-- 				default_app = tag.default_app,
+	-- 				selected = i == 1
+	-- 			}
+	-- 		)
+	-- 	end
+	-- end
+-- )
 
 local update_gap_and_shape = function(t)
 	-- Get current tag layout
