@@ -43,14 +43,14 @@ local bottom_panel = function(s)
 		widget = {
 			{
 				layout = wibox.layout.fixed.horizontal,
-				s.search,
-				separator,
+				-- s.search,
+				-- separator,
 				tag_list(s),
-				require('widget.xdg-folders')()
+				-- require('widget.xdg-folders')()
 			},
 			bg = beautiful.background,
 			shape = function(cr, w, h)
-				gears.shape.rounded_rect(cr, w, h, beautiful.groups_radius)
+				gears.shape.rounded_rect(cr, w, h, 0)
 			end,
 			widget = wibox.container.background
 		},
