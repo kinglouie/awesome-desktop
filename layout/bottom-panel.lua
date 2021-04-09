@@ -26,8 +26,6 @@ local bottom_panel = function(s)
 		}
 	end
 
-	s.search = require('widget.search-apps')()
-	
 	local separator =  wibox.widget {
 		orientation = 'vertical',
 		forced_height = dpi(1),
@@ -43,10 +41,7 @@ local bottom_panel = function(s)
 		widget = {
 			{
 				layout = wibox.layout.fixed.horizontal,
-				-- s.search,
-				-- separator,
 				tag_list(s),
-				-- require('widget.xdg-folders')()
 			},
 			bg = beautiful.background,
 			shape = function(cr, w, h)
