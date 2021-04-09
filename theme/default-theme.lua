@@ -118,7 +118,7 @@ local awesome_overrides = function(theme)
 	-- UI Groups
 	theme.groups_title_bg = '#ffffff' .. '15'
 	theme.groups_bg = '#ffffff' .. '10'
-	theme.groups_radius = dpi(16)
+	theme.groups_radius = dpi(5)
 
 	-- UI events
 	theme.leave_event = transparent
@@ -133,12 +133,12 @@ local awesome_overrides = function(theme)
 	theme.border_normal = gtk_variable().base_color
 	theme.border_marked = '#CC9393'
 	theme.border_width = dpi(0)
-	theme.border_radius = dpi(12)
+	theme.border_radius = dpi(5)
 
 	-- Decorations
 	theme.useless_gap = dpi(4)
 	theme.client_shape_rounded = function(cr, width, height)
-		gears.shape.rounded_rect(cr, width, height, dpi(12))
+		gears.shape.rounded_rect(cr, width, height, dpi(5))
 	end
 
 	-- Menu
